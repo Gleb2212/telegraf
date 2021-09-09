@@ -76,7 +76,7 @@ export class Telegraf<C extends Context = Context> extends Composer<C> {
     // https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode
     // to prevent a clean exit despite an error being thrown
     process.exitCode = 1
-    console.error('Unhandled error while processing', ctx.update)
+    console.error('Unhandled error while processing', ctx?.update)
     throw err
   }
 
@@ -128,7 +128,8 @@ export class Telegraf<C extends Context = Context> extends Composer<C> {
         await this.handleUpdates(updates)
       })
       .catch((e) => {
-        throw e
+        // @ts-expect-error
+        return this.handleError(e, this.telegram)
       })
   }
 
