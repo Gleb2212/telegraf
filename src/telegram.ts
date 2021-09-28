@@ -126,12 +126,12 @@ export class Telegram extends ApiClient {
    * @param chatId Unique identifier for the target chat or username of the target channel (in the format @channelusername)
    * @param text Text of the message to be sent
    */
-  sendMessage(
+  async sendMessage(
     chatId: number | string,
     text: string,
     extra?: tt.ExtraReplyMessage
   ) {
-    return this.callApi('sendMessage', { chat_id: chatId, text, ...extra })
+    return await this.callApi('sendMessage', { chat_id: chatId, text, ...extra })
   }
 
   /**
