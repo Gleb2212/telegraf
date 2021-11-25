@@ -163,8 +163,11 @@ export class Context<U extends Deunionize<tg.Update> = tg.Update> {
    * @see https://core.telegram.org/bots/api#answercallbackquery
    */
   answerCbQuery(this: Context, ...args: Shorthand<'answerCbQuery'>) {
-    this.assert(this.callbackQuery, 'answerCbQuery')
-    return this.telegram.answerCbQuery(this.callbackQuery.id, ...args)
+    try {
+      this.assert(this.callbackQuery, 'answerCbQuery')
+      return this.telegram.answerCbQuery(this.callbackQuery.id, ...args)
+    } catch (e) {}
+
   }
 
   /**
